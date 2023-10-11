@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.24)
 
 
 set(CMAKE_CXX_STANDARD 20)
@@ -10,10 +10,6 @@ cmake_policy(SET CMP0135 NEW)
 SET(INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include/")
 
 project(std::vector)
-
-include(src/CMakeLists.txt)
-include(integration_tests/CMakeLists.txt)
-include_directories(${CMAKE_SOURCE_DIR}/include/) # For including headers-path
 
 
 
@@ -36,3 +32,8 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing() # Should only be in the root folder's CMakeLists.txt
 include(GoogleTest) # Should only be in the root folder's CMakeLists.txt
+
+
+include(src/CMakeLists.txt)
+include(integration_tests/CMakeLists.txt)
+include_directories(${CMAKE_SOURCE_DIR}/include/) # For including headers-path

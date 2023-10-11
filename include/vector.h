@@ -5,11 +5,12 @@
 #ifndef STD_VECTOR_VECTOR_H
 #define STD_VECTOR_VECTOR_H
 
-template<T>
+#include <cstddef>
+template<class T>
 class vector {
-    size_t size;
+    std::size_t size;
     vector();
-    vector(size_t N);
+    vector(std::size_t N);
 
 };
 
