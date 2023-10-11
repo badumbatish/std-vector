@@ -1,0 +1,1 @@
+add_executable(tests "${CMAKE_CURRENT_LIST_DIR}/test_constructor.cpp")
