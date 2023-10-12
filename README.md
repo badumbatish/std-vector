@@ -47,7 +47,7 @@ Checklist
 - front (x)
     - access the first element (public member function)
 
-- back (0)
+- back (x)
     - access the last element (public member function)
 
 - data (0)

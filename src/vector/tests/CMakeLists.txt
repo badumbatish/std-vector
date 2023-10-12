@@ -19,9 +19,8 @@ target_link_libraries(test_front GTest::gtest_main)
 target_link_libraries(test_back GTest::gtest_main)
 
 
-
-gtest_discover_tests(test_constructor
-        test_push_back
-        test_indexing
-        test_front
-        test_back)
+gtest_discover_tests(test_constructor)
+gtest_discover_tests(test_push_back)
+gtest_discover_tests(test_indexing)
+gtest_discover_tests(test_front)
+gtest_discover_tests(test_back)
