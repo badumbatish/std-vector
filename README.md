@@ -5,7 +5,7 @@ Project for for for std::vector, also for pedagogy purposes.
 
 # CMake
 ```bash
-cmake -S . -B  build && cmake --build build && cd build && ctest --output-on-failure && cd ..
+cmake -S . -B  build && cmake --build build -j 4 && cd build && ctest --output-on-failure && cd ..
 ```
 
 
