@@ -44,7 +44,7 @@ Checklist
 - operator[] (x)
     - access specified element (public member function)
 
-- front (0)
+- front (x)
     - access the first element (public member function)
 
 - back (0)

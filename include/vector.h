@@ -26,7 +26,14 @@ public:
 
     T& operator[](size_t index);
     T& at(size_t index);
+
+    T& front();
 };
+
+template<class T, class Allocator>
+T &vector<T, Allocator>::front() {
+    return this->ptr[0];
+}
 
 template<class T, class Allocator>
 T &vector<T, Allocator>::at(size_t index) {

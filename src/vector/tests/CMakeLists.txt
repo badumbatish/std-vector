@@ -1,6 +1,7 @@
 add_executable(tests "${CMAKE_CURRENT_LIST_DIR}/test_constructor.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/test_push_back.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/test_indexing.cpp")
+        "${CMAKE_CURRENT_LIST_DIR}/test_indexing.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/test_front.cpp")
 
 target_include_directories(tests PRIVATE INCLUDE_DIR)
 
