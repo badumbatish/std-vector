@@ -3,10 +3,13 @@
 //
 
 #include "gtest/gtest.h"
-
-TEST(HelloTest, BasicAssertions) {
+#include "vector.h"
+TEST(test_constructor, basic_constructor) {
     // Expect two strings not to be equal.
-    EXPECT_STRNE("hello", "world");
-    // Expect equality.
-    EXPECT_EQ(7 * 6, 42);
+    auto vect = vector<int>();
+    EXPECT_EQ(vect.size(), 0);
+
+    vect = vector<int>(8);
+    EXPECT_EQ(vect.size(), 0);
+
 }
