@@ -29,7 +29,13 @@ public:
 
     T& front();
     T& back();
+    T* data();
 };
+
+template<class T, class Allocator>
+T *vector<T, Allocator>::data() {
+    return ptr.get();
+}
 
 template<class T, class Allocator>
 T &vector<T, Allocator>::back() {
