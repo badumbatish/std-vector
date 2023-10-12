@@ -30,17 +30,17 @@ public:
     T& front();
     T& back();
 
-    T* data();
-    const T* data() const;
+    constexpr T* data() noexcept;
+    constexpr const T* data() const noexcept;
 };
 
 template<class T, class Allocator>
-const T *vector<T, Allocator>::data() const {
+constexpr const T *vector<T, Allocator>::data() const noexcept {
     return ptr.get();
 }
 
 template<class T, class Allocator>
-T *vector<T, Allocator>::data() {
+constexpr T *vector<T, Allocator>::data() noexcept {
     return ptr.get();
 }
 
