@@ -32,7 +32,14 @@ public:
 
     constexpr T* data() noexcept;
     constexpr const T* data() const noexcept;
+
+    constexpr bool empty();
 };
+
+template<class T, class Allocator>
+constexpr bool vector<T, Allocator>::empty() {
+    return this->size() == 0;
+}
 
 template<class T, class Allocator>
 constexpr const T *vector<T, Allocator>::data() const noexcept {

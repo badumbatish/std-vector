@@ -77,7 +77,7 @@ Checklist
 - crend (C++11) (0)
     - returns a constant reverse iterator to the end (public member function)
 
-- empty (0)
+- empty (x)
     - checks whether the container is empty (public member function)
 
 - size (x)
