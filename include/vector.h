@@ -34,7 +34,15 @@ public:
     constexpr const T* data() const noexcept;
 
     constexpr bool empty();
+
+    void clear();
 };
+
+template<class T, class Allocator>
+void vector<T, Allocator>::clear() {
+    this->ptr.reset(std::make_unique<T>(this->capacity()));
+    this->_size = 0;
+}
 
 template<class T, class Allocator>
 constexpr bool vector<T, Allocator>::empty() {

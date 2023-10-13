@@ -95,7 +95,7 @@ Checklist
 - shrink_to_fit (DR*) (0)
     - reduces memory usage by freeing unused memory (public member function)
 
-- clear (0)
+- clear (x)
     - clears the contents (public member function)
 
 - insert (0)
