@@ -1,10 +1,3 @@
-function(ADD_TEST_EXECUTABLE TEST_NAME SOURCE_FILE)
-    add_executable(${TEST_NAME} "${CMAKE_CURRENT_LIST_DIR}/${SOURCE_FILE}")
-    target_include_directories(${TEST_NAME} PRIVATE INCLUDE_DIR)
-    target_link_libraries(${TEST_NAME} GTest::gtest_main)
-    gtest_discover_tests(${TEST_NAME})
-endfunction()
-
 ADD_TEST_EXECUTABLE(test_constructor test_constructor.cpp)
 ADD_TEST_EXECUTABLE(test_push_back test_push_back.cpp)
 ADD_TEST_EXECUTABLE(test_indexing test_indexing.cpp)

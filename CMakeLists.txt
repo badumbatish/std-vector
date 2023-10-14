@@ -30,10 +30,19 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+function(ADD_TEST_EXECUTABLE TEST_NAME SOURCE_FILE)
+    message("${CMAKE_CURRENT_LIST_DIR}/${SOURCE_FILE}")
+    add_executable(${TEST_NAME} ${CMAKE_CURRENT_LIST_DIR}/${SOURCE_FILE})
+
+    target_include_directories(${TEST_NAME} PRIVATE INCLUDE_DIR)
+    target_link_libraries(${TEST_NAME} GTest::gtest_main)
+    gtest_discover_tests(${TEST_NAME})
+endfunction()
+
 enable_testing() # Should only be in the root folder's CMakeLists.txt
 include(GoogleTest) # Should only be in the root folder's CMakeLists.txt
 
-
-include(src/CMakeLists.txt)
-include(integration_tests/CMakeLists.txt)
 include_directories(${CMAKE_SOURCE_DIR}/include/) # For including headers-path
+include(integration_tests/CMakeLists.txt)
+include(src/CMakeLists.txt)
+
