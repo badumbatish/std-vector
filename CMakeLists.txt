@@ -31,11 +31,10 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 function(ADD_TEST_EXECUTABLE TEST_NAME SOURCE_FILE)
-    message("${CMAKE_CURRENT_LIST_DIR}/${SOURCE_FILE}")
     add_executable(${TEST_NAME} ${CMAKE_CURRENT_LIST_DIR}/${SOURCE_FILE})
 
-    target_include_directories(${TEST_NAME} PRIVATE INCLUDE_DIR)
-    target_link_libraries(${TEST_NAME} GTest::gtest_main)
+    #target_include_directories(${TEST_NAME} PRIVATE INCLUDE_DIR)
+    target_link_libraries(${TEST_NAME} GTest::gtest_main vector)
     gtest_discover_tests(${TEST_NAME})
 endfunction()
 

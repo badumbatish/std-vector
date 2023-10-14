@@ -5,7 +5,7 @@ Project for for for std::vector, also for pedagogy purposes.
 
 # CMake
 ```bash
-cmake -S . -B  build && cmake --build build -j 4 && cd build && ctest --output-on-failure && cd ..
+cmake -DBUILD_SHARED_LIBS=ON -S . -B  build && cmake --build build -j 4 && cd build && ctest --output-on-failure && cd ..
 ```
 
 
