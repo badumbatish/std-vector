@@ -13,9 +13,10 @@
 template<class T, class Allocator = std::allocator<T>>
 class vector {
 private:
+    static inline size_t RESIZE_FACTOR{2};
     static inline size_t INIT_CAPACITY{8};
-    std::size_t _capacity{};
-    std::size_t _size{};
+    std::size_t _capacity;
+    std::size_t _size;
     std::unique_ptr<T[]> ptr;
 public:
     vector();
@@ -144,12 +145,38 @@ T &vector<T, Allocator>::operator[](size_t index) {
 
 template<class T, class Allocator>
 constexpr void vector<T, Allocator>::push_back(T &&value) {
-    ptr[this->_size++] = std::move(value);
+    if (_size + 1 > _capacity) {
+        std::unique_ptr<T[]> temp = std::make_unique<T[]>(capacity()*RESIZE_FACTOR + 4);
+
+        for (size_t i {}; i < size(); i++) {
+            temp[i] = ptr[i];
+        }
+        temp[_size++] = std::move(value);
+        ptr = std::move(temp);
+        _capacity = capacity()*RESIZE_FACTOR + 4;
+        return;
+    } else {
+        ptr[this->_size++] = std::move(value);
+    }
 }
 
 template<class T, class Allocator>
 constexpr void vector<T, Allocator>::push_back(const T &value) {
-    ptr[this->_size++] = value;
+
+    if (_size + 1 > _capacity) {
+        auto temp = std::make_unique<T[]>(capacity()*RESIZE_FACTOR + 4);
+
+        for (size_t i {}; i < size(); i++) {
+            temp[i] = ptr[i];
+        }
+        temp[_size++] = value;
+        ptr = std::move(temp);
+        _capacity = capacity()*RESIZE_FACTOR + 4;
+        return;
+    } else {
+        ptr[this->_size++] = value;
+        return;
+    }
 }
 
 
@@ -170,7 +197,7 @@ template<class T, class Allocator>
 vector<T, Allocator>::vector(std::size_t N) {
     this->ptr = std::make_unique<T[]>(N);
     this->_capacity = N;
-
+    this->_size = 0;
     for(auto i=0; i < N; i++) {
         this->push_back(T{});
     }
