@@ -18,15 +18,14 @@ TEST(test_iterator_begin, simple_begin) {
 
 }
 
-TEST(test_iterator_begin, ranged_based) {
-    auto v = vector<int>(8);
+TEST(test_iterator, ranged_based) {
+    auto v = vector<int>();
 
     for(int i=0 ; i < 3; i++) {
         v.push_back(i);
     }
 
-    for(int i=0 ; i < 3; i++) {
-        ASSERT_EQ(*(v.begin()+i), v[i]);
+    for (auto i : v) {
+        ASSERT_EQ(i, v[i]);
     }
-
 }

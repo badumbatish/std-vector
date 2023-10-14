@@ -6,7 +6,7 @@
 #include "vector.h"
 
 TEST(test_empty, simple_empty) {
-    auto vect = vector<int>(8);
+    auto vect = vector<int>();
 
     ASSERT_EQ(vect.empty(), true);
     vect.push_back(2);

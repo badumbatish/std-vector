@@ -10,6 +10,6 @@ TEST(test_constructor, basic_constructor) {
     EXPECT_EQ(vect.size(), 0);
 
     vect = vector<int>(8);
-    EXPECT_EQ(vect.size(), 0);
+    EXPECT_EQ(vect.size(), 8);
 
 }

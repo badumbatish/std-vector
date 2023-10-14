@@ -55,28 +55,28 @@ public:
         using reference         = T&;  // or also value_type&
 
     private:
-        pointer i_ptr;
+        pointer m_ptr;
     public:
         Iterator() = delete;
-        explicit Iterator(pointer ptr) : i_ptr(ptr) {};
-        reference operator*() const { return *i_ptr; }
-        pointer operator->() { return i_ptr; }
+        explicit Iterator(pointer ptr) : m_ptr(ptr) {};
+        reference operator*() const { return *m_ptr; }
+        pointer operator->() { return m_ptr; }
 
         // Add
-        Iterator& operator+(int n) { Iterator tmp = *this; tmp.i_ptr+=n; return tmp; }
+        Iterator operator+(int n) { Iterator tmp = *this; tmp.m_ptr+=n; return tmp; }
 
         // Minus
-        Iterator& operator-(int n) { Iterator tmp = *this; tmp.i_ptr-=n; return tmp; }
+        Iterator operator-(int n) { Iterator tmp = *this; tmp.m_ptr-=n; return tmp; }
 
 
         // Prefix increment
-        Iterator& operator++() { i_ptr++; return *this; }
+        Iterator& operator++() { m_ptr++; return *this; }
 
         // Postfix increment
         Iterator operator++(int) { Iterator tmp = *this; ++(*this); return tmp; }
 
         // Prefix decrement
-        Iterator& operator--() { i_ptr--; return *this; }
+        Iterator& operator--() { m_ptr--; return *this; }
 
         // Postfix decrement
         Iterator operator--(int) { Iterator tmp = *this; --(*this); return tmp; }
@@ -164,13 +164,16 @@ std::size_t vector<T, Allocator>::capacity() {
 }
 
 template<class T, class Allocator>
-vector<T, Allocator>::vector() : vector(INIT_CAPACITY) {}
+vector<T, Allocator>::vector() : vector(0) {}
 
 template<class T, class Allocator>
 vector<T, Allocator>::vector(std::size_t N) {
     this->ptr = std::make_unique<T[]>(N);
     this->_capacity = N;
-    this->_size = 0;
+
+    for(auto i=0; i < N; i++) {
+        this->push_back(T{});
+    }
 }
 
 
