@@ -1,2 +1,3 @@
 ADD_TEST_EXECUTABLE(itest_push_back itest_push_back.cpp)
 ADD_TEST_EXECUTABLE(itest_iterators itest_iterators.cpp)
+ADD_TEST_EXECUTABLE(itest_stl_algorithms itest_stl_algorithms.cpp)
