@@ -34,6 +34,6 @@ TEST(test_indexing, test_at) {
     vect.at(0) = 1;
     EXPECT_EQ(vect.at(0), 1);
 
-    ASSERT_NO_THROW(vect.at(0));
-    ASSERT_ANY_THROW(vect.at(3));
+    ASSERT_NO_THROW(vect.at(0)) << "Expected no throw when using at(0), this is safe.";
+    ASSERT_ANY_THROW(vect.at(3)) << "Expected a throw when using at(3), this is not safe";
 }

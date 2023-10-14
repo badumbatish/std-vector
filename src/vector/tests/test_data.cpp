@@ -14,6 +14,6 @@ TEST(test_data, simple_data) {
 
     auto ptr = vect.data();
     for (int i = 0; i < 5; i++) {
-        ASSERT_EQ(*(ptr + i), i);
+        ASSERT_EQ(*(ptr + i), i) << "Expected the raw pointer access to be equal to the index";
     }
 }

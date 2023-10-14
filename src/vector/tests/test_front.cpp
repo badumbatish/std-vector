@@ -9,5 +9,5 @@ TEST(test_front, simple_front) {
     auto vect = vector<int>();
     vect.push_back(2);
 
-    ASSERT_EQ(vect.front(), 2);
+    ASSERT_EQ(vect.front(), 2) << "The front of the vector should be 2 after inserting the first element: 2";
 }

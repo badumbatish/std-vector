@@ -13,7 +13,7 @@ TEST(test_iterator_begin, simple_begin) {
     }
 
     for(int i=0 ; i < 3; i++) {
-        ASSERT_EQ(*(v.begin()+i), v[i]);
+        ASSERT_EQ(*(v.begin()+i), v[i]) << "Expected equality between using iterators and operator[]";
     }
 
 }
@@ -26,6 +26,6 @@ TEST(test_iterator, ranged_based) {
     }
 
     for (auto i : v) {
-        ASSERT_EQ(i, v[i]);
+        ASSERT_EQ(i, v[i]) << "Expected equality between using range-based for-loop and operator[]";
     }
 }

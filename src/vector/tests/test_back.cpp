@@ -10,8 +10,8 @@ TEST(test_back, simple_back) {
 
     vect.push_back(2);
 
-    ASSERT_EQ(vect.back(), 2);
+    ASSERT_EQ(vect.back(), 2) << "The current last element should be 2";
     vect.push_back(3);
-    ASSERT_EQ(vect.back(), 3);
+    ASSERT_EQ(vect.back(), 3) << "The current last element should be 3";
 
 }

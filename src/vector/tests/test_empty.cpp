@@ -8,8 +8,8 @@
 TEST(test_empty, simple_empty) {
     auto vect = vector<int>();
 
-    ASSERT_EQ(vect.empty(), true);
+    ASSERT_EQ(vect.empty(), true) << "Expected the vector to be empty";
     vect.push_back(2);
-    ASSERT_EQ(vect.empty(), false);
+    ASSERT_EQ(vect.empty(), false) << "Expected the vector to not be empty after insertion";
 
 }
