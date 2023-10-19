@@ -42,8 +42,8 @@ enable_testing() # Should only be in the root folder's CMakeLists.txt
 include(GoogleTest) # Should only be in the root folder's CMakeLists.txt
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/) # For including headers-path
-add_subdirectory(integration_tests)
-add_subdirectory(src)
+include(integration_tests/CMakeLists.txt)
+include(src/CMakeLists.txt)
 
 export(TARGETS vector NAMESPACE vector:: FILE vectorTargets.cmake)
 set(CMAKE_EXPORT_PACKAGE_REGISTRY ON)
