@@ -42,8 +42,8 @@ enable_testing() # Should only be in the root folder's CMakeLists.txt
 include(GoogleTest) # Should only be in the root folder's CMakeLists.txt
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/) # For including headers-path
-include(integration_tests/CMakeLists.txt)
-include(src/CMakeLists.txt)
+add_subdirectory(integration_tests)
+add_subdirectory(src)
 
 
 
