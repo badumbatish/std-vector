@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # https://cmake.org/cmake/help/latest/policy/CMP0135.html
 # Set CMP0135 to NEW for fetchContent
 cmake_policy(SET CMP0135 NEW)
-SET(INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include/")
+SET(INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include/")
 
 project(std::vector)
 
@@ -41,7 +41,9 @@ endfunction()
 enable_testing() # Should only be in the root folder's CMakeLists.txt
 include(GoogleTest) # Should only be in the root folder's CMakeLists.txt
 
-include_directories(${CMAKE_SOURCE_DIR}/include/) # For including headers-path
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/) # For including headers-path
 include(integration_tests/CMakeLists.txt)
 include(src/CMakeLists.txt)
+
+
 
