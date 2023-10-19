@@ -45,9 +45,5 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/) # For including header
 include(integration_tests/CMakeLists.txt)
 include(src/CMakeLists.txt)
 
-export(TARGETS vector NAMESPACE vector:: FILE vectorTargets.cmake)
-set(CMAKE_EXPORT_PACKAGE_REGISTRY ON)
-export(PACKAGE vector)
-
 
 
