@@ -46,4 +46,4 @@ include(integration_tests/CMakeLists.txt)
 include(src/CMakeLists.txt)
 
 
-
+export(TARGETS vector FILE vector.cmake NAMESPACE cal)
