@@ -13,7 +13,7 @@
 template<class T, class Allocator = std::allocator<T>>
 class vector {
 private:
-
+    // TODO: Make std::unique_ptr use the Allocator alloc instead of the default new, delete
     static constexpr size_t RESIZE_FACTOR{2};
     static constexpr size_t INIT_CAPACITY{8};
     Allocator alloc;
