@@ -99,7 +99,7 @@ typename vector<T, Allocator>::Iterator vector<T, Allocator>::begin() {
 
 template<class T, class Allocator>
 typename vector<T, Allocator>::Iterator vector<T, Allocator>::end() {
-    return Iterator(this->ptr.get()+this->capacity());
+    return Iterator(this->ptr.get()+this->size());
 }
 
 template<class T, class Allocator>
@@ -149,7 +149,7 @@ T &vector<T, Allocator>::operator[](size_t index) {
 template<class T, class Allocator>
 constexpr void vector<T, Allocator>::push_back(T &&value) {
     if (_size + 1 > _capacity) {
-        std::unique_ptr<T[]> temp = std::make_unique<T[]>(capacity()*RESIZE_FACTOR + 4);
+        auto temp = std::unique_ptr<T[]>(this->alloc.allocate(capacity()*RESIZE_FACTOR + 4));
 
         for (size_t i {}; i < size(); i++) {
             temp[i] = ptr[i];
@@ -167,7 +167,7 @@ template<class T, class Allocator>
 constexpr void vector<T, Allocator>::push_back(const T &value) {
 
     if (_size + 1 > _capacity) {
-        auto temp = std::make_unique<T[]>(capacity()*RESIZE_FACTOR + 4);
+        auto temp = std::unique_ptr<T[]>(this->alloc.allocate(capacity()*RESIZE_FACTOR + 4));
 
         for (size_t i {}; i < size(); i++) {
             temp[i] = ptr[i];
@@ -199,20 +199,20 @@ vector<T, Allocator>::vector() noexcept(noexcept(Allocator())) : vector(Allocato
 template<class T, class Allocator>
 vector<T, Allocator>::vector(const Allocator& alloc) noexcept {
     this->alloc = alloc;
-    this->ptr = std::unique_ptr<T[]>(this->alloc.allocate(INIT_CAPACITY);); // std::make_unique<T[]>(INIT_CAPACITY);
+    this->ptr = std::unique_ptr<T[]>(this->alloc.allocate(INIT_CAPACITY)); // std::make_unique<T[]>(INIT_CAPACITY);
     this->_capacity = INIT_CAPACITY;
     this->_size = 0;
 }
 
 template<class T, class Allocator>
 vector<T, Allocator>::vector(std::size_t N) {
-    this->ptr = std::make_unique<T[]>(N);
+    alloc = Allocator();
+    this->ptr = std::unique_ptr<T[]>(this->alloc.allocate(N));
     this->_capacity = N;
     this->_size = 0;
     for(auto i=0; i < N; i++) {
         this->push_back(T{});
     }
-    alloc = Allocator();
 }
 
 
