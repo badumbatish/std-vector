@@ -13,13 +13,16 @@
 template<class T, class Allocator = std::allocator<T>>
 class vector {
 private:
-    static inline size_t RESIZE_FACTOR{2};
-    static inline size_t INIT_CAPACITY{8};
+
+    static constexpr size_t RESIZE_FACTOR{2};
+    static constexpr size_t INIT_CAPACITY{8};
+    Allocator alloc;
     std::size_t _capacity;
     std::size_t _size;
     std::unique_ptr<T[]> ptr;
 public:
-    vector();
+    vector() noexcept(noexcept(Allocator()));
+    explicit vector(const Allocator &) noexcept;
 
     explicit vector(std::size_t N);
 
@@ -191,7 +194,15 @@ std::size_t vector<T, Allocator>::capacity() {
 }
 
 template<class T, class Allocator>
-vector<T, Allocator>::vector() : vector(0) {}
+vector<T, Allocator>::vector() noexcept(noexcept(Allocator())) : vector(Allocator()) { }
+
+template<class T, class Allocator>
+vector<T, Allocator>::vector(const Allocator& alloc) noexcept {
+    this->ptr = std::make_unique<T[]>(INIT_CAPACITY);
+    this->_capacity = INIT_CAPACITY;
+    this->_size = 0;
+    this->alloc = alloc;
+}
 
 template<class T, class Allocator>
 vector<T, Allocator>::vector(std::size_t N) {
@@ -201,6 +212,7 @@ vector<T, Allocator>::vector(std::size_t N) {
     for(auto i=0; i < N; i++) {
         this->push_back(T{});
     }
+    alloc = Allocator();
 }
 
 
