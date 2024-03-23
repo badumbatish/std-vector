@@ -198,10 +198,10 @@ vector<T, Allocator>::vector() noexcept(noexcept(Allocator())) : vector(Allocato
 
 template<class T, class Allocator>
 vector<T, Allocator>::vector(const Allocator& alloc) noexcept {
-    this->ptr = std::make_unique<T[]>(INIT_CAPACITY);
+    this->alloc = alloc;
+    this->ptr = std::unique_ptr<T[]>(this->alloc.allocate(INIT_CAPACITY);); // std::make_unique<T[]>(INIT_CAPACITY);
     this->_capacity = INIT_CAPACITY;
     this->_size = 0;
-    this->alloc = alloc;
 }
 
 template<class T, class Allocator>
