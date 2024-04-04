@@ -51,6 +51,10 @@ public:
 
     void clear();
 
+    constexpr vector& operator=(const vector& other);
+    constexpr vector& operator=( vector&& other );
+    constexpr vector& operator=( std::initializer_list<T> ilist );
+
     // https://www.internalpointers.com/post/writing-custom-iterators-modern-cpp
     struct Iterator {
         using iterator_category = std::contiguous_iterator_tag;
@@ -94,6 +98,34 @@ public:
 };
 
 template<class T, class Allocator>
+constexpr vector<T, Allocator> & vector<T, Allocator>::operator=(const vector &other) {
+    // TODO : Does this perfect forwards? What is perfect forwards
+    this->clear();
+    for (auto it : other) this->push_back(it);
+
+    return *this;
+}
+
+
+template<class T, class Allocator>
+constexpr vector<T, Allocator> & vector<T, Allocator>::operator=( vector&& other ) {
+    // TODO : Does this perfect forwards? What is perfect forwards
+    this->clear();
+    for (auto it : other) this->push_back(it);
+
+    return *this;
+}
+
+template<class T, class Allocator>
+constexpr vector<T, Allocator> & vector<T, Allocator>::operator=( std::initializer_list<T> ilist ) {
+    // TODO : Does this perfect forwards? What is perfect forwards
+    this->clear();
+    for (auto it : ilist) this->push_back(it);
+
+    return *this;
+}
+
+template<class T, class Allocator>
 typename vector<T, Allocator>::Iterator vector<T, Allocator>::begin() {
     return Iterator(this->ptr.get());
 }
@@ -105,7 +137,7 @@ typename vector<T, Allocator>::Iterator vector<T, Allocator>::end() {
 
 template<class T, class Allocator>
 void vector<T, Allocator>::clear() {
-    this->ptr.reset(std::make_unique<T>(this->capacity()));
+    this->ptr.reset(this->allocate(this->capacity()));
     this->_size = 0;
 }
 

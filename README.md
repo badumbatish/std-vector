@@ -26,7 +26,7 @@ Checklist
 - (destructor) (0)
     - destructs the vector (public member function)
 
-- operator= (0)
+- operator= (x)
     - assigns values to the container (public member function)
 
 - assign (0)
