@@ -35,6 +35,8 @@ public:
 
     constexpr void push_back(T &&value);
 
+    constexpr void pop_back();
+
     T &operator[](size_t index);
 
     T &at(size_t index);
@@ -97,6 +99,11 @@ public:
     Iterator begin();
     Iterator end();
 };
+
+template<class T, class Allocator>
+constexpr void vector<T, Allocator>::pop_back() {
+    this->_size -= 1;
+}
 
 template<class T, class Allocator>
 constexpr Allocator vector<T, Allocator>::get_allocator() const noexcept {
