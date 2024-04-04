@@ -35,7 +35,7 @@ Checklist
 - assign_range (0) (C++23)
     - assigns a range of values to the container (public member function)
 
-- get_allocator (0)
+- get_allocator (x)
     - returns the associated allocator (public member function)
 
 - at (x)
@@ -53,13 +53,13 @@ Checklist
 - data (0)
     - direct access to the underlying array (public member function)
 
-- begin (0)
+- begin (x)
     - returns an iterator to the beginning (public member function)
 
 - cbegin (C++11) (0)
     - returns a constant iterator to the beginning (public member function)
 
-- end (0)
+- end (x)
     - returns an iterator to the end (public member function)
 
 - cend (C++11) (0)

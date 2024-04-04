@@ -55,6 +55,7 @@ public:
     constexpr vector& operator=( vector&& other );
     constexpr vector& operator=( std::initializer_list<T> ilist );
 
+    constexpr Allocator get_allocator() const noexcept;
     // https://www.internalpointers.com/post/writing-custom-iterators-modern-cpp
     struct Iterator {
         using iterator_category = std::contiguous_iterator_tag;
@@ -96,6 +97,11 @@ public:
     Iterator begin();
     Iterator end();
 };
+
+template<class T, class Allocator>
+constexpr Allocator vector<T, Allocator>::get_allocator() const noexcept {
+    return this->alloc;
+}
 
 template<class T, class Allocator>
 constexpr vector<T, Allocator> & vector<T, Allocator>::operator=(const vector &other) {
