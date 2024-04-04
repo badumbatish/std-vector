@@ -20,6 +20,7 @@ private:
     std::size_t _capacity;
     std::size_t _size;
     std::unique_ptr<T[]> ptr;
+    T* allocate(size_t n) { return this->alloc.allocate(n); }
 public:
     vector() noexcept(noexcept(Allocator()));
     explicit vector(const Allocator &) noexcept;
@@ -149,7 +150,7 @@ T &vector<T, Allocator>::operator[](size_t index) {
 template<class T, class Allocator>
 constexpr void vector<T, Allocator>::push_back(T &&value) {
     if (_size + 1 > _capacity) {
-        auto temp = std::unique_ptr<T[]>(this->alloc.allocate(capacity()*RESIZE_FACTOR + 4));
+        auto temp = std::unique_ptr<T[]>(this->allocate(capacity()*RESIZE_FACTOR + 4));
 
         for (size_t i {}; i < size(); i++) {
             temp[i] = ptr[i];
@@ -167,7 +168,7 @@ template<class T, class Allocator>
 constexpr void vector<T, Allocator>::push_back(const T &value) {
 
     if (_size + 1 > _capacity) {
-        auto temp = std::unique_ptr<T[]>(this->alloc.allocate(capacity()*RESIZE_FACTOR + 4));
+        auto temp = std::unique_ptr<T[]>(this->allocate(capacity()*RESIZE_FACTOR + 4));
 
         for (size_t i {}; i < size(); i++) {
             temp[i] = ptr[i];
@@ -199,7 +200,7 @@ vector<T, Allocator>::vector() noexcept(noexcept(Allocator())) : vector(Allocato
 template<class T, class Allocator>
 vector<T, Allocator>::vector(const Allocator& alloc) noexcept {
     this->alloc = alloc;
-    this->ptr = std::unique_ptr<T[]>(this->alloc.allocate(INIT_CAPACITY)); // std::make_unique<T[]>(INIT_CAPACITY);
+    this->ptr = std::unique_ptr<T[]>(this->allocate(INIT_CAPACITY)); // std::make_unique<T[]>(INIT_CAPACITY);
     this->_capacity = INIT_CAPACITY;
     this->_size = 0;
 }
@@ -207,7 +208,7 @@ vector<T, Allocator>::vector(const Allocator& alloc) noexcept {
 template<class T, class Allocator>
 vector<T, Allocator>::vector(std::size_t N) {
     alloc = Allocator();
-    this->ptr = std::unique_ptr<T[]>(this->alloc.allocate(N));
+    this->ptr = std::unique_ptr<T[]>(this->allocate(N));
     this->_capacity = N;
     this->_size = 0;
     for(auto i=0; i < N; i++) {
